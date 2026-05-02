@@ -1,0 +1,151 @@
+[
+    {
+        "id": 1,
+        "fecha": "2026-04-26T18:28:11.234282",
+        "productos": [
+            {
+                "codigo": "20083779",
+                "nombre": "manilla",
+                "cantidad": 5,
+                "precio": 10000.0,
+                "subtotal": 50000.0
+            }
+        ],
+        "total": 50000.0,
+        "metodo_pago": "efectivo"
+    },
+    {
+        "id": 2,
+        "fecha": "2026-04-26T18:39:12.633703",
+        "productos": [
+            {
+                "codigo": "20083779",
+                "nombre": "manilla",
+                "cantidad": 3,
+                "precio": 10000.0,
+                "subtotal": 30000.0
+            }
+        ],
+        "total": 30000.0,
+        "metodo_pago": "tarjeta"
+    },
+    {
+        "id": 3,
+        "fecha": "2026-04-26T18:39:33.968909",
+        "productos": [
+            {
+                "codigo": "20083779",
+                "nombre": "manilla",
+                "cantidad": 3,
+                "precio": 10000.0,
+                "subtotal": 30000.0
+            }
+        ],
+        "total": 30000.0,
+        "metodo_pago": "efectivo"
+    },
+    {
+        "id": 4,
+        "fecha": "2026-04-30T14:42:27.330464",
+        "productos": [
+            {
+                "codigo": "20083779",
+                "nombre": "manilla",
+                "cantidad": 2,
+                "precio": 10000.0,
+                "subtotal": 20000.0
+            }
+        ],
+        "total": 20000.0,
+        "metodo_pago": "efectivo"
+    },
+    {
+        "id": 5,
+        "fecha": "2026-04-30T14:43:48.864691",
+        "productos": [
+            {
+                "codigo": "20083779",
+                "nombre": "manilla",
+                "cantidad": 2,
+                "precio": 10000.0,
+                "subtotal": 20000.0
+            }
+        ],
+        "total": 20000.0,
+        "metodo_pago": "transferencia"
+    },
+    {
+        "id": 6,
+        "fecha": "2026-04-30T15:08:19.522268",
+        "productos": [
+            {
+                "codigo": "37792008",
+                "nombre": "Sombrero ",
+                "cantidad": 1,
+                "precio": 150000.0,
+                "subtotal": 150000.0
+            }
+        ],
+        "total": 150000.0,
+        "metodo_pago": "tarjeta"
+    },
+    {
+        "id": 7,
+        "fecha": "2026-04-30T15:15:19.422156",
+        "productos": [
+            {
+                "codigo": "20083779",
+                "nombre": "manilla",
+                "cantidad": 1,
+                "precio": 10000.0,
+                "subtotal": 10000.0
+            },
+            {
+                "codigo": "37792008",
+                "nombre": "Sombrero ",
+                "cantidad": 1,
+                "precio": 150000.0,
+                "subtotal": 150000.0
+            }
+        ],
+        "total": 160000.0,
+        "metodo_pago": "efectivo"
+    },
+    {
+        "id": 8,
+        "fecha": "2026-05-01T13:04:48.742388",
+        "productos": [
+            {
+                "codigo": "5351545",
+                "nombre": "ruana",
+                "cantidad": 1,
+                "precio": 270000.0,
+                "subtotal": 270000.0
+            }
+        ],
+        "total": 270000.0,
+        "metodo_pago": "tarjeta"
+    },
+    {
+        "id": 9,
+        "fecha": "2026-05-01T18:12:57.760575",
+        "productos": [
+            {
+                "codigo": "5351545",
+                "nombre": "ruana",
+                "cantidad": 1,
+                "precio": 270000.0,
+                "subtotal": 270000.0
+            },
+            {
+                "codigo": "20083779",
+                "nombre": "manilla",
+                "cantidad": 1,
+                "precio": 10000.0,
+                "subtotal": 10000.0
+            }
+        ],
+        "total": 280000.0,
+        "metodo_pago": "tarjeta"
+    }
+]

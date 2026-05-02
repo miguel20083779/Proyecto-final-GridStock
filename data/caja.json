@@ -1,0 +1,154 @@
+{
+    "movimientos": [
+        {
+            "id": 1,
+            "fecha": "2026-04-26T18:28:11.239524",
+            "tipo": "ingreso",
+            "monto": 50000.0,
+            "descripcion": "Venta #1"
+        },
+        {
+            "id": 2,
+            "fecha": "2026-04-26T18:39:12.633703",
+            "tipo": "ingreso",
+            "monto": 30000.0,
+            "descripcion": "Venta #2"
+        },
+        {
+            "id": 3,
+            "fecha": "2026-04-26T18:39:33.983611",
+            "tipo": "ingreso",
+            "monto": 30000.0,
+            "descripcion": "Venta #3"
+        },
+        {
+            "id": 4,
+            "fecha": "2026-04-30T14:42:27.330464",
+            "tipo": "ingreso",
+            "monto": 20000.0,
+            "descripcion": "Venta #4"
+        },
+        {
+            "id": 5,
+            "fecha": "2026-04-30T14:43:48.864691",
+            "tipo": "ingreso",
+            "monto": 20000.0,
+            "descripcion": "Venta #5"
+        },
+        {
+            "id": 6,
+            "fecha": "2026-04-30T15:08:19.522268",
+            "tipo": "ingreso",
+            "monto": 150000.0,
+            "descripcion": "Venta #6"
+        },
+        {
+            "id": 7,
+            "fecha": "2026-04-30T15:15:19.422156",
+            "tipo": "ingreso",
+            "monto": 160000.0,
+            "descripcion": "Venta #7"
+        },
+        {
+            "id": 8,
+            "fecha": "2026-05-01T13:04:48.742388",
+            "tipo": "ingreso",
+            "monto": 270000.0,
+            "descripcion": "Venta #8"
+        },
+        {
+            "id": 9,
+            "fecha": "2026-05-01T18:12:57.767169",
+            "tipo": "ingreso",
+            "monto": 280000.0,
+            "descripcion": "Venta #9"
+        }
+    ],
+    "cierres": [
+        {
+            "id": 1,
+            "tipo": "diario",
+            "fecha": "2026-04-26T18:28:36.074356",
+            "ventas": 50000.0,
+            "gastos": 0,
+            "total": 50000.0,
+            "estado": "cerrado"
+        },
+        {
+            "id": 2,
+            "tipo": "diario",
+            "fecha": "2026-04-30T14:43:08.099828",
+            "ventas": 20000.0,
+            "gastos": 0,
+            "total": 20000.0,
+            "estado": "cerrado"
+        },
+        {
+            "id": 3,
+            "tipo": "mensual",
+            "fecha": "2026-04-30T14:43:16.123811",
+            "periodo": "2026-04",
+            "ventas": 130000.0,
+            "gastos": 0,
+            "total": 130000.0,
+            "estado": "cerrado"
+        },
+        {
+            "id": 4,
+            "tipo": "diario",
+            "fecha": "2026-04-30T15:11:04.725979",
+            "ventas": 190000.0,
+            "gastos": 0,
+            "total": 190000.0,
+            "estado": "cerrado"
+        },
+        {
+            "id": 5,
+            "tipo": "mensual",
+            "fecha": "2026-04-30T15:11:28.373619",
+            "periodo": "2026-04",
+            "ventas": 300000.0,
+            "gastos": 0,
+            "total": 300000.0,
+            "estado": "cerrado"
+        },
+        {
+            "id": 6,
+            "tipo": "diario",
+            "fecha": "2026-05-01T13:07:17.206495",
+            "ventas": 270000.0,
+            "gastos": 0,
+            "total": 270000.0,
+            "estado": "cerrado"
+        },
+        {
+            "id": 7,
+            "tipo": "mensual",
+            "fecha": "2026-05-01T13:07:28.523990",
+            "periodo": "2026-05",
+            "ventas": 270000.0,
+            "gastos": 0,
+            "total": 270000.0,
+            "estado": "cerrado"
+        },
+        {
+            "id": 8,
+            "tipo": "diario",
+            "fecha": "2026-05-01T18:14:20.494234",
+            "ventas": 550000.0,
+            "gastos": 0,
+            "total": 550000.0,
+            "estado": "cerrado"
+        },
+        {
+            "id": 9,
+            "tipo": "mensual",
+            "fecha": "2026-05-01T18:14:36.620315",
+            "periodo": "2026-05",
+            "ventas": 550000.0,
+            "gastos": 0,
+            "total": 550000.0,
+            "estado": "cerrado"
+        }
+    ]
+}
