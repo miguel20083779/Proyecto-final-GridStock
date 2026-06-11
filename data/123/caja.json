@@ -1,0 +1,22 @@
+{
+    "movimientos": [
+        {
+            "id": 1,
+            "fecha": "2026-06-02T18:20:00.730295",
+            "tipo": "ingreso",
+            "monto": 50000.0,
+            "descripcion": "Venta #1"
+        }
+    ],
+    "cierres": [
+        {
+            "id": 1,
+            "tipo": "diario",
+            "fecha": "2026-06-02T18:20:26.044415",
+            "ventas": 50000.0,
+            "gastos": 0,
+            "total": 50000.0,
+            "estado": "cerrado"
+        }
+    ]
+}

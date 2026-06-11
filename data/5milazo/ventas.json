@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "fecha": "2026-05-28T20:33:23.486006",
+        "productos": [
+            {
+                "codigo": "45456451",
+                "nombre": "juguete",
+                "cantidad": 1,
+                "precio": 25000.0,
+                "subtotal": 25000.0
+            }
+        ],
+        "total": 25000.0,
+        "metodo_pago": "efectivo"
+    }
+]

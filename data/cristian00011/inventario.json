@@ -1,0 +1,9 @@
+{
+    "123": {
+        "nombre": "bananaco",
+        "precio": 77000.0,
+        "cantidad": 0,
+        "umbral_minimo": 10,
+        "fecha_actualizacion": "2026-05-28T18:17:03.694880"
+    }
+}

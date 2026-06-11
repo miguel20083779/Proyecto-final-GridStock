@@ -1,0 +1,30 @@
+{
+    "37792008": {
+        "nombre": "Sombrero ",
+        "precio": 150000.0,
+        "cantidad": 8,
+        "umbral_minimo": 10,
+        "fecha_actualizacion": "2026-04-26T18:35:44.978488"
+    },
+    "20083779": {
+        "nombre": "manilla",
+        "precio": 10000.0,
+        "cantidad": 8,
+        "umbral_minimo": 10,
+        "fecha_actualizacion": "2026-04-30T15:14:50.646907"
+    },
+    "5351545": {
+        "nombre": "ruana",
+        "precio": 270000.0,
+        "cantidad": 3,
+        "umbral_minimo": 10,
+        "fecha_actualizacion": "2026-05-01T13:03:48.634057"
+    },
+    "5454415": {
+        "nombre": "camisa",
+        "precio": 58000.0,
+        "cantidad": 10,
+        "umbral_minimo": 10,
+        "fecha_actualizacion": "2026-05-01T18:11:59.414246"
+    }
+}

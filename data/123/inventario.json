@@ -1,0 +1,9 @@
+{
+    "45456451": {
+        "nombre": "juguete",
+        "precio": 25000.0,
+        "cantidad": 8,
+        "umbral_minimo": 10,
+        "fecha_actualizacion": "2026-06-02T18:19:26.151548"
+    }
+}

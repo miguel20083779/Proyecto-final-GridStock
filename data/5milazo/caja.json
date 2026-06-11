@@ -1,0 +1,12 @@
+{
+    "movimientos": [
+        {
+            "id": 1,
+            "fecha": "2026-05-28T20:33:23.490011",
+            "tipo": "ingreso",
+            "monto": 25000.0,
+            "descripcion": "Venta #1"
+        }
+    ],
+    "cierres": []
+}

@@ -1,11 +1,12 @@
 // Configuración
 const API_URL = 'http://localhost:5000/api';
+const $ = (id) => document.getElementById(id);
+const $$ = (selector) => document.querySelectorAll(selector);
+const money = (v) => `$${Number(v || 0).toFixed(2)}`;
+const goLogin = () => { window.location.href = '../login.html'; };
 
 // Verificar autenticación
-const token = localStorage.getItem('gridstock_token');
-if (!token) {
-    window.location.href = 'login.html';
-}
+if (!localStorage.getItem('gridstock_token')) goLogin();
 
 // Función para hacer peticiones autenticadas
 async function authFetch(url, options = {}) {
@@ -18,7 +19,7 @@ async function authFetch(url, options = {}) {
     if (response.status === 401) {
         localStorage.removeItem('gridstock_token');
         localStorage.removeItem('gridstock_user');
-        window.location.href = 'login.html';
+        goLogin();
     }
     return response;
 }
@@ -38,29 +39,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // Navegación del sidebar
-    document.querySelectorAll('.sidebar nav a').forEach(link => {
+    $$('.sidebar nav a').forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const page = link.dataset.page;
             showPage(page);
             
             // Actualizar clase active
-            document.querySelectorAll('.sidebar nav a').forEach(l => l.classList.remove('active'));
+            $$('.sidebar nav a').forEach(l => l.classList.remove('active'));
             link.classList.add('active');
         });
     });
 
     // Tabs en reportes
-    document.querySelectorAll('.tab').forEach(tab => {
+    $$('.tab').forEach(tab => {
         tab.addEventListener('click', () => {
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            $$('.tab').forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
             cargarVentas(tab.dataset.tab);
         });
     });
 
     // Formulario agregar producto
-    document.getElementById('form-agregar-producto').addEventListener('submit', agregarProducto);
+    $('form-agregar-producto').addEventListener('submit', agregarProducto);
 
     // Cargar datos iniciales
     cargarInventario();
@@ -70,8 +71,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function showPage(pageId) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById(pageId).classList.add('active');
+    $$('.page').forEach(p => p.classList.remove('active'));
+    $(pageId).classList.add('active');
 
     // Actualizar datos según la página
     if (pageId === 'inventario') cargarInventario();
@@ -91,7 +92,7 @@ function showPage(pageId) {
 // ==================== INVENTARIO ====================
 async function cargarInventario() {
     try {
-        const response = await fetch(`${API_URL}/inventario`);
+        const response = await authFetch(`${API_URL}/inventario`);
         const productos = await response.json();
         
         const tbody = document.querySelector('#tabla-inventario tbody');
@@ -102,7 +103,7 @@ async function cargarInventario() {
             tr.innerHTML = `
                 <td>${codigo}</td>
                 <td>${prod.nombre}</td>
-                <td>$${parseFloat(prod.precio).toFixed(2)}</td>
+                <td>${money(prod.precio)}</td>
                 <td>${prod.cantidad}</td>
                 <td>${prod.umbral_minimo}</td>
                 <td class="action-btns">
@@ -119,31 +120,57 @@ async function cargarInventario() {
 async function agregarProducto(e) {
     e.preventDefault();
     
+    const codigo = $('prod-codigo').value.trim();
+    const nombre = $('prod-nombre').value.trim();
+    const precio = $('prod-precio').value.trim();
+    const cantidad = $('prod-cantidad').value.trim();
+    const umbral = $('prod-umbral').value.trim();
+    
+    // Validar que los campos no estén vacíos
+    if (!codigo || !nombre || !precio || !cantidad) {
+        alert('Todos los campos son requeridos');
+        return;
+    }
+    
+    // Validar que precio sea un número
+    if (isNaN(parseFloat(precio))) {
+        alert('El precio debe ser un número válido');
+        return;
+    }
+    
+    // Validar que cantidad sea un número entero
+    if (isNaN(parseInt(cantidad)) || parseInt(cantidad) < 0) {
+        alert('La cantidad debe ser un número entero válido');
+        return;
+    }
+
     const data = {
-        codigo: document.getElementById('prod-codigo').value,
-        nombre: document.getElementById('prod-nombre').value,
-        precio: parseFloat(document.getElementById('prod-precio').value),
-        cantidad: parseInt(document.getElementById('prod-cantidad').value),
-        umbral_minimo: parseInt(document.getElementById('prod-umbral').value)
+        codigo: codigo,
+        nombre: nombre,
+        precio: parseFloat(precio),
+        cantidad: parseInt(cantidad),
+        umbral_minimo: parseInt(umbral) || 10
     };
 
     try {
-        const response = await fetch(`${API_URL}/inventario`, {
+        const response = await authFetch(`${API_URL}/inventario`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         });
         
         const result = await response.json();
-        alert(result.message);
         
         if (result.success) {
-            document.getElementById('form-agregar-producto').reset();
+            alert(result.message);
+            $('form-agregar-producto').reset();
             cargarInventario();
+        } else {
+            alert('Error: ' + (result.message || 'No se pudo agregar el producto'));
         }
     } catch (error) {
         console.error('Error:', error);
-        alert('Error al agregar producto');
+        alert('Error al agregar producto: ' + error.message);
     }
 }
 
@@ -151,7 +178,7 @@ async function eliminarProducto(codigo) {
     if (!confirm(`¿Eliminar producto ${codigo}?`)) return;
 
     try {
-        const response = await fetch(`${API_URL}/inventario/${codigo}`, {
+        const response = await authFetch(`${API_URL}/inventario/${codigo}`, {
             method: 'DELETE'
         });
         
@@ -167,7 +194,7 @@ async function eliminarProducto(codigo) {
 // ==================== VENTAS ====================
 async function cargarProductosVenta() {
     try {
-        const response = await fetch(`${API_URL}/inventario`);
+        const response = await authFetch(`${API_URL}/inventario`);
         const productos = await response.json();
         
         const select = document.getElementById('venta-producto');
@@ -187,8 +214,8 @@ async function cargarProductosVenta() {
 }
 
 function agregarItemVenta() {
-    const select = document.getElementById('venta-producto');
-    const cantidad = parseInt(document.getElementById('venta-cantidad').value);
+    const select = $('venta-producto');
+    const cantidad = parseInt($('venta-cantidad').value);
     
     const codigo = select.value;
     if (!codigo) {
@@ -201,9 +228,14 @@ function agregarItemVenta() {
     }
 
     // Obtener datos del producto
-    fetch(`${API_URL}/inventario/${codigo}`)
+    authFetch(`${API_URL}/inventario/${codigo}`)
         .then(res => res.json())
         .then(prod => {
+            // Validar que prod sea válido
+            if (!prod || prod.success === false || !prod.nombre) {
+                alert('Error al obtener producto: ' + (prod.message || 'Desconocido'));
+                return;
+            }
             if (prod.cantidad < cantidad) {
                 alert(`Stock insuficiente. Disponible: ${prod.cantidad}`);
                 return;
@@ -223,6 +255,11 @@ function agregarItemVenta() {
             }
 
             actualizarCarrito();
+            $('venta-cantidad').value = '1';
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error al agregar producto al carrito');
         });
 }
 
@@ -247,7 +284,7 @@ function actualizarCarrito() {
         tbody.appendChild(tr);
     });
 
-    document.getElementById('total-venta').textContent = total.toFixed(2);
+    $('total-venta').textContent = money(total);
 }
 
 function eliminarDelCarrito(index) {
@@ -261,7 +298,15 @@ async function finalizarVenta() {
         return;
     }
 
-    const metodoPago = document.getElementById('metodo-pago').value;
+    const metodoPago = $('metodo-pago').value;
+    
+    // Validar que todos los productos tengan datos válidos
+    for (let item of carrito) {
+        if (!item.codigo || !item.nombre || !item.precio || !item.cantidad) {
+            alert('Error: Datos incompletos en el carrito');
+            return;
+        }
+    }
     
     const data = {
         productos: carrito,
@@ -269,7 +314,7 @@ async function finalizarVenta() {
     };
 
     try {
-        const response = await fetch(`${API_URL}/ventas`, {
+        const response = await authFetch(`${API_URL}/ventas`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
@@ -283,12 +328,13 @@ async function finalizarVenta() {
             actualizarCarrito();
             cargarInventario();
             cargarAlertas();
+            cargarEstadoCaja();
         } else {
-            alert(result.message);
+            alert('Error: ' + (result.message || 'No se pudo registrar la venta'));
         }
     } catch (error) {
         console.error('Error:', error);
-        alert('Error al registrar venta');
+        alert('Error al registrar venta: ' + error.message);
     }
 }
 
@@ -297,15 +343,15 @@ async function finalizarVenta() {
 async function cargarStatsVentas() {
     try {
         const [resHoy, resMes] = await Promise.all([
-            fetch(`${API_URL}/ventas/total-hoy`),
-            fetch(`${API_URL}/ventas/total-mes`)
+            authFetch(`${API_URL}/ventas/total-hoy`),
+            authFetch(`${API_URL}/ventas/total-mes`)
         ]);
         
         const dataHoy = await resHoy.json();
         const dataMes = await resMes.json();
         
-        document.getElementById('ventas-hoy').textContent = `$${dataHoy.total.toFixed(2)}`;
-        document.getElementById('ventas-mes').textContent = `$${dataMes.total.toFixed(2)}`;
+        $('ventas-hoy').textContent = money(dataHoy.total);
+        $('ventas-mes').textContent = money(dataMes.total);
     } catch (error) {
         console.error('Error:', error);
     }
@@ -321,7 +367,7 @@ async function cargarVentas(tipo) {
     }
 
     try {
-        const response = await fetch(url);
+        const response = await authFetch(url);
         const ventas = await response.json();
         
         const tbody = document.querySelector('#tabla-ventas tbody');
@@ -350,13 +396,13 @@ async function cargarVentas(tipo) {
 // ==================== CAJA ====================
 async function cargarEstadoCaja() {
     try {
-        const response = await fetch(`${API_URL}/caja/estado`);
+        const response = await authFetch(`${API_URL}/caja/estado`);
         const estado = await response.json();
         
-        document.getElementById('caja-ventas').textContent = `$${estado.ventas_del_dia.toFixed(2)}`;
-        document.getElementById('caja-ingresos').textContent = `$${estado.ingresos.toFixed(2)}`;
-        document.getElementById('caja-egresos').textContent = `$${estado.egresos.toFixed(2)}`;
-        document.getElementById('caja-balance').textContent = `$${estado.balance.toFixed(2)}`;
+        $('caja-ventas').textContent = money(estado.ventas_del_dia);
+        $('caja-ingresos').textContent = money(estado.ingresos);
+        $('caja-egresos').textContent = money(estado.egresos);
+        $('caja-balance').textContent = money(estado.balance);
     } catch (error) {
         console.error('Error:', error);
     }
@@ -366,7 +412,7 @@ async function cierreDiario() {
     if (!confirm('¿Realizar cierre de caja del día?')) return;
 
     try {
-        const response = await fetch(`${API_URL}/caja/cierre-diario`, {
+        const response = await authFetch(`${API_URL}/caja/cierre-diario`, {
             method: 'POST'
         });
         
@@ -385,7 +431,7 @@ async function cierreMensual() {
     if (!confirm('¿Realizar cierre de caja del mes?')) return;
 
     try {
-        const response = await fetch(`${API_URL}/caja/cierre-mensual`, {
+        const response = await authFetch(`${API_URL}/caja/cierre-mensual`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({})
@@ -404,7 +450,7 @@ async function cierreMensual() {
 
 async function cargarCierres() {
     try {
-        const response = await fetch(`${API_URL}/caja/cierres`);
+        const response = await authFetch(`${API_URL}/caja/cierres`);
         const cierres = await response.json();
         
         const tbody = document.querySelector('#tabla-cierres tbody');
@@ -434,11 +480,11 @@ async function cargarCierres() {
 // ==================== ALERTAS ====================
 async function cargarAlertas() {
     try {
-        const response = await fetch(`${API_URL}/inventario/alertas`);
+        const response = await authFetch(`${API_URL}/inventario/alertas`);
         const alertas = await response.json();
         
         const tbody = document.querySelector('#tabla-alertas tbody');
-        const sinAlertas = document.getElementById('sin-alertas');
+        const sinAlertas = $('sin-alertas');
         
         if (alertas.length === 0) {
             tbody.innerHTML = '';
@@ -481,5 +527,5 @@ async function logout() {
     
     localStorage.removeItem('gridstock_token');
     localStorage.removeItem('gridstock_user');
-    window.location.href = 'login.html';
+    goLogin();
 }

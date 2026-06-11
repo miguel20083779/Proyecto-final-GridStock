@@ -1,12 +1,29 @@
 {
+    "remate": {
+        "password": "1234",
+        "rol": "usuario",
+        "fecha_creacion": "2026-05-01T21:03:13.722463"
+    },
     "casta wayuu": {
         "password": "2008",
         "rol": "admin",
-        "fecha_creacion": "2026-04-26T18:38:18.414981"
+        "fecha_creacion": "2026-05-01T21:08:15.535841",
+        "fecha_actualizacion": "2026-05-28T20:17:05.674661"
     },
     "5milazo": {
         "password": "3779",
         "rol": "admin",
-        "fecha_creacion": "2026-04-26T18:44:33.982592"
+        "fecha_creacion": "2026-05-07T15:20:09.937548",
+        "fecha_actualizacion": "2026-05-28T20:32:47.747439"
+    },
+    "cristian00011": {
+        "password": "200325",
+        "rol": "admin",
+        "fecha_creacion": "2026-05-28T18:15:46.489771"
+    },
+    "123": {
+        "password": "1234",
+        "rol": "usuario",
+        "fecha_creacion": "2026-06-02T18:18:56.803706"
     }
 }

@@ -1,0 +1,16 @@
+{
+    "464632": {
+        "nombre": "manilla",
+        "precio": 10000.0,
+        "cantidad": 5,
+        "umbral_minimo": 10,
+        "fecha_actualizacion": "2026-05-28T20:29:08.771894"
+    },
+    "55515": {
+        "nombre": "juguete",
+        "precio": 25000.0,
+        "cantidad": 9,
+        "umbral_minimo": 10,
+        "fecha_actualizacion": "2026-06-04T20:37:32.251492"
+    }
+}
