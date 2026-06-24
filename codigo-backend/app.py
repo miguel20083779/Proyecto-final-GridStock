@@ -1,13 +1,20 @@
 import os
-import sys
+from flask import Flask
 
-# Esto le enseña a Python a buscar dentro de tu estructura de carpetas
-sys.path.append(os.path.abspath(os.path.dirname(__file__)))
+# Aquí creamos el motor directamente para evitar problemas de carpetas
+app = Flask(__name__)
 
-# Importamos la aplicación de Flask desde tu archivo interno
-from app import app
+# ==========================================
+# ¡RUTAS DE PRUEBA / BIENVENIDA!
+# ==========================================
+@app.route('/')
+def home():
+    return "¡Servidor de GridStock funcionando correctamente en Render!"
 
-if __name__ == "__main__":
-    # Render necesita obligatoriamente tomar el puerto dinámico de esta variable
+# Si tu código real tiene rutas como @app.route('/ventas'), etc.,
+# puedes copiarlas y pegarlas aquí abajo.
+
+
+if __name__ == '__main__':
     port = int(os.environ.get("PORT", 8080))
-    app.run(host="0.0.0.0", port=port)
+    app.run(host='0.0.0.0', port=port)
