@@ -1,0 +1,17 @@
+name: Deploy to Render via GitHub Actions
+
+on:
+  push:
+    branches:
+      - main  # Se activa automáticamente cada vez que subes cambios a la rama main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to Render
+        run: |
+          curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
